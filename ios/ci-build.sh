@@ -50,7 +50,9 @@ if [ -n "$ASC_KEY_ID" ] && [ -n "$ASC_KEY_P8" ] && [ -n "$TEAM_ID" ]; then
   echo "== 2) Signieren und zu App Store Connect hochladen (Build $BUILD_NR) =="
   KEYDIR=$(mktemp -d)
   KEY="$KEYDIR/AuthKey_$ASC_KEY_ID.p8"
-  printf '%s\n' "$ASC_KEY_P8" > "$KEY"
+  # Schluessel robust neu zusammensetzen (Zeilenumbrueche gehen beim Speichern als Secret unter Windows leicht verloren)
+  BODY=$(printf '%s' "$ASC_KEY_P8" | tr -d '\r\n ' | sed -e 's/-----BEGINPRIVATEKEY-----//' -e 's/-----ENDPRIVATEKEY-----//')
+  { echo "-----BEGIN PRIVATE KEY-----"; echo "$BODY" | fold -w 64; echo "-----END PRIVATE KEY-----"; } > "$KEY"
   AUTH="-allowProvisioningUpdates -authenticationKeyPath $KEY -authenticationKeyID $ASC_KEY_ID -authenticationKeyIssuerID $ASC_ISSUER_ID"
   xcodebuild $SRC -scheme App -configuration Release -destination 'generic/platform=iOS' \
     -archivePath build/App.xcarchive $AUTH DEVELOPMENT_TEAM="$TEAM_ID" CODE_SIGN_STYLE=Automatic \
