@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" width="96" height="96">
+<defs><linearGradient id="lvbg-carrom" x1="0" y1="0" x2=".9" y2="1"><stop offset="0" stop-color="#F8F1F3"/><stop offset="1" stop-color="#E9D5DB"/></linearGradient></defs><rect width="96" height="96" rx="20" fill="url(#lvbg-carrom)"/><path d="M0 20A20 20 0 0 1 20 0h56a20 20 0 0 1 20 20v8C68 40 28 42 0 26z" fill="#FFFFFF" opacity=".22"/><rect x="1" y="1" width="94" height="94" rx="19" fill="none" stroke="#FFFFFF" stroke-opacity=".35" stroke-width="1.5"/>
+<rect x="14" y="14" width="68" height="68" rx="6" fill="#3B3290"/>
+<rect x="20" y="20" width="56" height="56" fill="#E3DEF3"/>
+<circle cx="24" cy="24" r="4.5" fill="#1A120C"/>
+<circle cx="72" cy="24" r="4.5" fill="#1A120C"/>
+<circle cx="24" cy="72" r="4.5" fill="#1A120C"/>
+<circle cx="72" cy="72" r="4.5" fill="#1A120C"/>
+<circle cx="48" cy="46" r="9" fill="none" stroke="#3B2614" stroke-width="1"/>
+<circle cx="48" cy="46" r="4" fill="#E8436A"/>
+<circle cx="40.5" cy="46" r="3.6" fill="#F3EBDD" stroke="#B9A98E" stroke-width="0.8"/>
+<circle cx="55.5" cy="46" r="3.6" fill="#2D2926"/>
+<circle cx="44.2" cy="39.5" r="3.6" fill="#2D2926"/>
+<circle cx="51.8" cy="39.5" r="3.6" fill="#F3EBDD" stroke="#B9A98E" stroke-width="0.8"/>
+<circle cx="44.2" cy="52.5" r="3.6" fill="#F3EBDD" stroke="#B9A98E" stroke-width="0.8"/>
+<circle cx="51.8" cy="52.5" r="3.6" fill="#2D2926"/>
+<path d="M30 65 H66" stroke="#3B2614" stroke-width="1"/>
+<circle cx="56" cy="65" r="5" fill="#8C5464"/>
+<circle cx="56" cy="65" r="3.8" fill="#FAF6EC"/>
+</svg>

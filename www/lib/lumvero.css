@@ -1,0 +1,458 @@
+/* ==========================================================================
+   Lumvero Studio – Designebene "Lumen"
+   Wird nach lib/chogan.css geladen und überschreibt Marke, Farben, Formen,
+   Schrift und Layout. Spiellogik bleibt unberührt.
+   ========================================================================== */
+
+@font-face {
+  font-family: 'Outfit';
+  src: url('../fonts/outfit-latin.woff2') format('woff2-variations'),
+       url('../fonts/outfit-latin.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ------------------------------------------------------------------ Tokens */
+:root {
+  --f: 'Outfit', 'Vazirmatn', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --lv-violet: #7B61FF;
+  --lv-cyan:   #22D3C5;
+  --lv-spark:  #FFD36B;
+  --lv-grad:   linear-gradient(135deg, var(--lv-violet) 0%, #5A8BFF 50%, var(--lv-cyan) 100%);
+  --lv-logo: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237B61FF'/%3E%3Cstop offset='1' stop-color='%2322D3C5'/%3E%3C/linearGradient%3E%3CradialGradient id='s' cx='.5' cy='.5' r='.5'%3E%3Cstop offset='0' stop-color='%23FFF6D6'/%3E%3Cstop offset='1' stop-color='%23FFD36B' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Cpath d='M22 15v33h22' fill='none' stroke='%23fff' stroke-width='7.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='44' cy='20' r='11' fill='url(%23s)'/%3E%3Ccircle cx='44' cy='20' r='4.5' fill='%23FFE7A3'/%3E%3C/svg%3E");
+
+  --c-accent:      #5B47E0;
+  --c-accent-soft: #E8E4FF;
+  --c-accent-ink:  #FFFFFF;
+  --c-good:        #23946F;
+  --c-good-soft:   #DDF4EC;
+  --c-warn:        #B97C12;
+  --c-warn-soft:   #FBF0D9;
+  --c-bad:         #D23E59;
+  --c-bad-soft:    #FBE2E7;
+  --c-gold:        #D99A1E;
+  --c-tier-1: #C0855A;
+  --c-tier-2: #9CA6C2;
+  --c-tier-3: #E0A526;
+  --c-tier-4: #3FC8D6;
+  --c-tier-5: #9C7BFF;
+
+  --r-xs: 6px;
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 18px;
+  --r-xl: 22px;
+
+  --sh-1: 0 1px 2px rgba(24, 22, 70, .06), 0 2px 6px rgba(24, 22, 70, .05);
+  --sh-2: 0 2px 6px rgba(24, 22, 70, .07), 0 10px 24px rgba(24, 22, 70, .08);
+  --sh-3: 0 6px 14px rgba(24, 22, 70, .10), 0 22px 44px rgba(24, 22, 70, .12);
+}
+
+/* Standardpalette hell */
+:root:not([data-colors]),
+:root[data-colors="default"],
+.ch-swatch[data-colors="default"] {
+  --c-bg:          #F3F4FA;
+  --c-bg-tint:     #E9EBF6;
+  --c-surface:     #FFFFFF;
+  --c-surface-2:   #EEF0F8;
+  --c-surface-3:   #E3E6F3;
+  --c-line:        #D9DDEE;
+  --c-text:        #14172B;
+  --c-text-dim:    #4D5473;
+  --c-text-faint:  #6C7392;
+}
+
+/* Standardpalette dunkel (System) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --c-accent:      #9A88FF;
+    --c-accent-soft: #272154;
+    --c-accent-ink:  #0B0A1F;
+    --c-good:        #4FD1A5;
+    --c-good-soft:   #12302A;
+    --c-warn:        #F0B54A;
+    --c-warn-soft:   #33280F;
+    --c-bad:         #FF7891;
+    --c-bad-soft:    #3A1822;
+    --c-gold:        #FFC75A;
+    --sh-1: 0 1px 2px rgba(0, 0, 0, .4), 0 2px 8px rgba(0, 0, 0, .3);
+    --sh-2: 0 2px 8px rgba(0, 0, 0, .45), 0 10px 26px rgba(0, 0, 0, .35);
+    --sh-3: 0 8px 18px rgba(0, 0, 0, .5), 0 24px 48px rgba(0, 0, 0, .45);
+  }
+  :root:not([data-theme="light"]):not([data-colors]),
+  :root:not([data-theme="light"])[data-colors="default"],
+  :root:not([data-theme="light"]) .ch-swatch[data-colors="default"] {
+    --c-bg:          #0A0C18;
+    --c-bg-tint:     #0F1225;
+    --c-surface:     #141831;
+    --c-surface-2:   #1B2040;
+    --c-surface-3:   #232950;
+    --c-line:        #2C335E;
+    --c-text:        #EEF0FF;
+    --c-text-dim:    #A9AFD6;
+    --c-text-faint:  #7E86B3;
+  }
+}
+
+/* Standardpalette dunkel (manuell gewählt) */
+:root[data-theme="dark"] {
+  --c-accent:      #9A88FF;
+  --c-accent-soft: #272154;
+  --c-accent-ink:  #0B0A1F;
+  --c-good:        #4FD1A5;
+  --c-good-soft:   #12302A;
+  --c-warn:        #F0B54A;
+  --c-warn-soft:   #33280F;
+  --c-bad:         #FF7891;
+  --c-bad-soft:    #3A1822;
+  --c-gold:        #FFC75A;
+  --sh-1: 0 1px 2px rgba(0, 0, 0, .4), 0 2px 8px rgba(0, 0, 0, .3);
+  --sh-2: 0 2px 8px rgba(0, 0, 0, .45), 0 10px 26px rgba(0, 0, 0, .35);
+  --sh-3: 0 8px 18px rgba(0, 0, 0, .5), 0 24px 48px rgba(0, 0, 0, .45);
+}
+:root[data-theme="dark"]:not([data-colors]),
+:root[data-theme="dark"][data-colors="default"],
+:root[data-theme="dark"] .ch-swatch[data-colors="default"] {
+  --c-bg:          #0A0C18;
+  --c-bg-tint:     #0F1225;
+  --c-surface:     #141831;
+  --c-surface-2:   #1B2040;
+  --c-surface-3:   #232950;
+  --c-line:        #2C335E;
+  --c-text:        #EEF0FF;
+  --c-text-dim:    #A9AFD6;
+  --c-text-faint:  #7E86B3;
+}
+
+/* ------------------------------------------------------- Grundflächen */
+body:has(.ch-nav) {
+  background:
+    radial-gradient(900px 520px at 100% -8%, color-mix(in srgb, var(--lv-violet) 16%, transparent), transparent 62%),
+    radial-gradient(700px 420px at -10% 30%, color-mix(in srgb, var(--lv-cyan) 9%, transparent), transparent 60%),
+    var(--c-bg);
+  background-attachment: fixed;
+}
+
+h1, h2, h3 { letter-spacing: -.015em; }
+
+/* ------------------------------------------------------------- Kopfzeile */
+.ch-head { margin-bottom: var(--s-4); align-items: center; }
+.ch-head h1 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -.03em;
+  line-height: 1.1;
+}
+.ch-head__title:has(> p) h1::before {
+  content: "";
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  background: var(--lv-logo) center / contain no-repeat;
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--lv-violet) 40%, transparent);
+}
+.ch-head p {
+  margin-top: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--c-text-faint);
+}
+.ch-coin {
+  background: transparent;
+  border: 1.5px solid color-mix(in srgb, var(--c-gold) 55%, transparent);
+  border-radius: var(--r-sm);
+}
+
+/* --------------------------------------------- Tageskarte ("Spotlight") */
+.lv-hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--r-xl) !important;
+  border: 1px solid rgba(255, 255, 255, .14) !important;
+  background-image:
+    linear-gradient(105deg, rgba(9, 10, 26, .94) 0%, rgba(9, 10, 26, .70) 48%, rgba(9, 10, 26, .10) 100%),
+    radial-gradient(120% 140% at 100% 0%, rgba(255, 255, 255, .35), transparent 55%) !important;
+  box-shadow: 0 14px 34px rgba(16, 12, 60, .35) !important;
+  padding: 20px !important;
+}
+.lv-hero::after {
+  content: "";
+  position: absolute;
+  inset-inline-end: -40px;
+  bottom: -60px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 230, 160, .45), transparent 65%);
+  pointer-events: none;
+}
+.lv-hero h2 { font-size: 30px; font-weight: 800; letter-spacing: -.03em; margin-top: 6px !important; }
+.lv-hero .ch-row > .ch-grow > .ch-row:first-child {
+  display: inline-flex;
+  padding: 4px 10px;
+  border-radius: var(--r-pill);
+  background: rgba(255, 255, 255, .14);
+  backdrop-filter: blur(6px);
+}
+.lv-hero .ch-row > div:last-child:not(.ch-grow) {
+  position: relative;
+  z-index: 1;
+  width: 54px !important;
+  height: 54px !important;
+  border-radius: 50% !important;
+  background: #FFFFFF !important;
+  color: #14172B;
+  box-shadow: 0 0 0 6px rgba(255, 255, 255, .15), 0 8px 22px rgba(0, 0, 0, .35);
+}
+
+/* ----------------------------------------------------- Abschnittsköpfe */
+.ch-section__head h2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--c-text-dim);
+}
+.ch-section__head h2::before {
+  content: "";
+  width: 14px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--lv-grad);
+}
+.ch-cat__head, .ch-cat__head h2, .ch-cat__head h3 { letter-spacing: .04em; }
+
+/* ------------------------------------------------- Suche, Filter, Sort */
+.ch-search {
+  border-radius: var(--r-md);
+  background: var(--c-surface-2);
+  border-color: transparent;
+  box-shadow: none;
+}
+.ch-search:focus-within { border-color: var(--c-accent); background: var(--c-surface); }
+.ch-sort { border-radius: var(--r-sm) !important; }
+
+.ch-seg {
+  background: transparent;
+  padding: 0;
+  gap: 6px;
+  border-radius: 0;
+}
+.ch-seg button {
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-sm);
+  min-height: 36px;
+  padding: 6px 14px;
+  background: var(--c-surface);
+}
+.ch-seg button[aria-selected="true"] {
+  background: var(--c-accent);
+  border-color: var(--c-accent);
+  color: var(--c-accent-ink);
+  box-shadow: 0 6px 16px color-mix(in srgb, var(--c-accent) 35%, transparent);
+}
+:root:not([data-theme="light"]) .ch-seg button[aria-selected="true"],
+:root[data-theme="dark"] .ch-seg button[aria-selected="true"] { color: var(--c-accent-ink); }
+.ch-gamebar .ch-seg button[aria-selected="true"],
+.ch-gameroot .ch-seg button[aria-selected="true"] {
+  background: var(--game, var(--c-accent));
+  border-color: var(--game, var(--c-accent));
+}
+
+/* ------------------------------------------------------ Spielekacheln */
+.ch-games--grid { gap: 10px; }
+.ch-games--grid .ch-game {
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-lg);
+  padding: 7px 7px 10px;
+  gap: 8px;
+  text-align: start;
+  overflow: hidden;
+  box-shadow: var(--sh-1);
+}
+.ch-games--grid .ch-game__icon {
+  border-radius: var(--r-md);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .04);
+}
+.ch-games--grid .ch-game__name {
+  font-size: 13px;
+  font-weight: 700;
+  padding-inline: 3px;
+  letter-spacing: -.005em;
+}
+.ch-games--grid .ch-game:active { transform: scale(.97); }
+.ch-game__icon { border-radius: var(--r-md); }
+
+/* ------------------------------------------------------------- Karten */
+.ch-card { border-radius: var(--r-lg); border-color: var(--c-line); box-shadow: var(--sh-1); }
+.ch-btn--primary {
+  background-image: linear-gradient(135deg, rgba(255, 255, 255, .14), rgba(255, 255, 255, 0));
+  border-radius: var(--r-md);
+}
+.ch-btn { border-radius: var(--r-md); }
+.ch-modal { border-radius: var(--r-xl) var(--r-xl) var(--r-lg) var(--r-lg); }
+
+/* ------------------------------------------------- Navigation (Hochkant) */
+@media not all and (orientation: landscape) and (max-height: 540px) {
+  .ch-nav {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: none;
+    width: auto;
+    max-width: none;
+    padding: 6px 10px calc(6px + var(--safe-b));
+    border: 0;
+    border-top: 1px solid var(--c-line);
+    border-radius: 20px 20px 0 0;
+    background: color-mix(in srgb, var(--c-surface) 92%, transparent);
+    box-shadow: 0 -10px 30px rgba(10, 8, 40, .18);
+  }
+  .ch-nav__in { margin: 0 auto; }
+  .ch-nav__item {
+    position: relative;
+    border-radius: var(--r-md);
+    font-weight: 600;
+    letter-spacing: .01em;
+  }
+  .ch-nav__item[aria-selected="true"] {
+    background: transparent;
+    color: var(--c-accent);
+  }
+  .ch-nav__item[aria-selected="true"]::before {
+    content: "";
+    position: absolute;
+    top: -7px;
+    left: 30%;
+    right: 30%;
+    height: 3px;
+    border-radius: 0 0 3px 3px;
+    background: var(--lv-grad);
+    box-shadow: 0 2px 10px color-mix(in srgb, var(--lv-violet) 70%, transparent);
+  }
+  .ch-nav__item[aria-selected="true"] svg { transform: none; filter: drop-shadow(0 0 6px color-mix(in srgb, var(--c-accent) 55%, transparent)); }
+}
+
+/* ------------------------------------------------------- Willkommen */
+.ch-welcome__art svg { filter: drop-shadow(0 14px 30px color-mix(in srgb, var(--lv-violet) 45%, transparent)); }
+.ch-welcome h1 {
+  background: var(--lv-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 800;
+  letter-spacing: -.03em;
+}
+.ch-char { border-radius: var(--r-lg); border-width: 1.5px; }
+.ch-char[aria-pressed="true"] { border-color: var(--c-accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-accent) 22%, transparent); }
+
+/* -------------------------------------------------------- Spielleiste */
+.ch-gamebar { border-bottom: 0; box-shadow: 0 1px 0 var(--c-line), 0 6px 16px rgba(10, 8, 40, .06); }
+.ch-gamebar__title { font-weight: 800; letter-spacing: -.01em; }
+
+/* ------------------------------------------------------- Liga, Ränge */
+.ch-rank { border-radius: var(--r-md); }
+.ch-rank--me { background: color-mix(in srgb, var(--c-accent) 14%, var(--c-surface)); box-shadow: inset 3px 0 0 var(--c-accent); }
+.ch-bar { border-radius: var(--r-xs); }
+.ch-bar__fill { background: var(--lv-grad); border-radius: var(--r-xs); }
+.ch-toast { border-radius: var(--r-md); }
+.ch-badge { border-radius: var(--r-xs); }
+
+/* ==========================================================================
+   Lumvero-Spielbretter "Mondlicht"
+   Bretter lesen ihre Farben zur Laufzeit aus diesen Variablen.
+   Spielerfarben: Violett #7B61FF, Türkis #13A3B2, Gold #F2B233, Magenta #E0508A
+   ========================================================================== */
+:root {
+  /* Schach */
+  --cs-light: #E6E3F6 !important; --cs-dark: #8173CF !important;
+  --cs-last: rgba(34, 211, 197, .45) !important; --cs-check: rgba(224, 80, 138, .75) !important;
+  /* Dame */
+  --ck-light: #E6E3F6 !important; --ck-dark: #5F52B0 !important; --ck-frame: #241E5C !important;
+  --ck-p1: #17142F !important; --ck-p1-rim: #3A3470 !important; --ck-p2: #E0508A !important; --ck-p2-rim: #FF8DB5 !important;
+  /* Reversi */
+  --rv-felt: #233F7A !important; --rv-grid: rgba(255, 255, 255, .14) !important;
+  --rv-black: #15122B !important; --rv-white: #F5F3FF !important;
+  /* Vier gewinnt */
+  --fr-frame: #4433B8 !important; --fr-rim: #2E2290 !important; --fr-back: #ECE9FB !important;
+  --fr-a: #FFB938 !important; --fr-a-lt: #FFE1A1 !important; --fr-b: #E0508A !important; --fr-b-lt: #FFB8CF !important; --fr-ink: #1C1640 !important;
+  /* Go, Gomoku */
+  --go-wood: #DCD7EE !important; --go-line: rgba(28, 22, 70, .55) !important; --go-black: #15122B !important; --go-white: #F8F7FF !important;
+  --gk-wood: #E4E0F4 !important; --gk-line: rgba(28, 22, 70, .5) !important; --gk-black: #15122B !important; --gk-white: #F8F7FF !important;
+  /* Hex, Ecken, Verbinden */
+  --hx-cell: #EDEBF8 !important; --hx-line: #CBC6E6 !important; --hx-r: #E8436A !important; --hx-r-lt: #F7B3C4 !important;
+  --hx-b: #4A6CFF !important; --hx-b-lt: #B8C6FF !important; --hx-ink: #2A2550 !important;
+  --cn-cell: #EDEBF8 !important; --cn-line: #CBC6E6 !important; --cn-a: #F28A1E !important; --cn-b: #4A6CFF !important;
+  --cn-a-mark: #FFD9B0 !important; --cn-b-mark: #C8D3FF !important; --cn-ink: #2A2550 !important;
+  --lu-board: #EEECF8 !important; --lu-edge: #DCD8EF !important; --lu-o: #F28A1E !important; --lu-o-lt: #FFD2A6 !important;
+  --lu-b: #4A6CFF !important; --lu-b-lt: #B8C6FF !important; --lu-ink: #2A2550 !important;
+  /* Xiangqi */
+  --xq-board: #E3DEF3 !important; --xq-line: #4B3F8F !important; --xq-face: #FBFAFF !important; --xq-red: #D23E6E !important; --xq-black: #1C1838 !important;
+  /* Korridor */
+  --cr-board: #14172E !important; --cr-cell: #1F2448 !important; --cr-groove: #7B61FF !important; --cr-wall: #FFC24D !important;
+  --cr-wall-dk: #C78F1C !important; --cr-p0: #F2EFFF !important;
+  /* Domino */
+  --dm-felt: #1F3A6E !important; --dm-felt-2: #1A3260 !important; --dm-ivory: #F8F7FF !important; --dm-edge: #23204A !important;
+  --dm-pip: #15122B !important; --dm-back: #5B4FC8 !important;
+  /* Billard, Snooker */
+  --eb-cloth: #2B4FA0 !important; --eb-cloth-2: #24448C !important; --eb-rail: #1A1840 !important; --eb-rail-2: #110F2C !important; --eb-pocket: #07060F !important;
+  --sn-cloth: #233F8A !important; --sn-cloth-2: #1E3678 !important; --sn-rail: #1A1840 !important; --sn-rail-2: #110F2C !important; --sn-pocket: #07060F !important;
+  /* Lichter aus, Mahjong, Paare, Schiebepuzzle */
+  --lt-board: #14172E !important; --lt-off: #262C55 !important; --lt-on: #FFD36B !important; --lt-glow: rgba(255, 211, 107, .75) !important;
+  --mj-face: #FBFAFF !important; --mj-side: #D6D1EE !important; --mj-edge: #A9A1D4 !important;
+  --pr-face: #FBFAFF !important; --pr-edge: #DAD6EE !important; --pr-back: #5B47E0 !important; --pr-back-2: #22D3C5 !important;
+  --sp-tray: #2A2370 !important; --sp-hole: #1D1854 !important; --sp-tile: #F6F4FF !important; --sp-tile-edge: #D2CCEE !important;
+  --sp-ink: #241E5C !important; --sp-home: #7B61FF !important;
+  /* Senet */
+  --sn-sq: #ECE8F8 !important; --sn-sq-sp: #D9D2F1 !important; --sn-frame: #5B4FC8 !important; --sn-glyph: #3B3290 !important;
+  --sn-p0: #FBFAFF !important; --sn-p0-edge: #5B4FC8 !important; --sn-p1: #1C1838 !important; --sn-p1-edge: #0E0C22 !important;
+  /* Rohre, Flut */
+  --pw-line: #2A2550 !important; --pw-tile: #F1EFFA !important; --pw-lockbg: #DCD7F0 !important; --pw-pipe: #6B5BD6 !important;
+  --pw-dry: #E7E4F6 !important; --pw-water: #22B8D0 !important; --pw-lockink: #2A2550 !important;
+  --fl-case: #2A2F5A !important; --fl-flange: #1C1F42 !important; --fl-frame: #1C1F42 !important; --fl-water: #22B8D0 !important; --fl-cursor: #FFC24D !important;
+  /* Mehrspieler-Farben: Ludo, Gänsespiel, Leiterspiel, Kettenreaktion, Bowling, Darts */
+  --lu-c0: #E0508A !important; --lu-c1: #22C39A !important; --lu-c2: #F2B233 !important; --lu-c3: #7B61FF !important;
+  --gs-c0: #E0508A !important; --gs-c1: #7B61FF !important; --gs-c2: #F2B233 !important; --gs-c3: #22C39A !important;
+  --sl-c0: #E0508A !important; --sl-c1: #7B61FF !important; --sl-c2: #F2B233 !important; --sl-c3: #13A3B2 !important;
+  --bw-c0: #7B61FF !important; --bw-c1: #E0508A !important;
+  --dt-c0: #7B61FF !important; --dt-c1: #F2B233 !important;
+  --mc-rival: #13A3B2 !important;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --cs-light: #CFC9EE !important; --cs-dark: #6455B5 !important;
+    --ck-light: #CFC9EE !important; --ck-dark: #4C4198 !important;
+    --rv-felt: #1B3166 !important; --rv-grid: rgba(255, 255, 255, .12) !important;
+    --go-wood: #B8B0DA !important; --gk-wood: #C3BCE2 !important;
+    --mc-rival: #3FC8D6 !important;
+  }
+}
+:root[data-theme="dark"] {
+  --cs-light: #CFC9EE !important; --cs-dark: #6455B5 !important;
+  --ck-light: #CFC9EE !important; --ck-dark: #4C4198 !important;
+  --rv-felt: #1B3166 !important; --rv-grid: rgba(255, 255, 255, .12) !important;
+  --go-wood: #B8B0DA !important; --gk-wood: #C3BCE2 !important;
+  --mc-rival: #3FC8D6 !important;
+}
+
+/* Kartenrücken: "Lumen" (Standard) und "Nacht" */
+.ch-pback {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 70'%3E%3Cdefs%3E%3ClinearGradient id='a' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%234B36C9'/%3E%3Cstop offset='1' stop-color='%231B1550'/%3E%3C/linearGradient%3E%3Cpattern id='p' width='5' height='5' patternUnits='userSpaceOnUse'%3E%3Ccircle cx='2.5' cy='2.5' r='.55' fill='%23B9A8FF' fill-opacity='.45'/%3E%3C/pattern%3E%3CradialGradient id='g' cx='.5' cy='.5' r='.5'%3E%3Cstop offset='0' stop-color='%23FFD36B' stop-opacity='.55'/%3E%3Cstop offset='1' stop-color='%23FFD36B' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width='50' height='70' fill='url(%23a)'/%3E%3Crect width='50' height='70' fill='url(%23p)'/%3E%3Crect x='3' y='3' width='44' height='64' rx='3' fill='none' stroke='%2322D3C5' stroke-width='.8' stroke-opacity='.85'/%3E%3Ccircle cx='25' cy='35' r='13' fill='url(%23g)'/%3E%3Cpath d='M21 28v13h8.5' fill='none' stroke='%23fff' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='29.5' cy='29.5' r='1.9' fill='%23FFE7A3'/%3E%3C/svg%3E") !important;
+}
+[data-pback="termeh"] .ch-pback {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 70'%3E%3Cdefs%3E%3Cpattern id='d' width='6' height='6' patternUnits='userSpaceOnUse' patternTransform='rotate(45)'%3E%3Cpath d='M0 0v6' stroke='%2322D3C5' stroke-opacity='.28' stroke-width='1'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='50' height='70' fill='%230E1230'/%3E%3Crect width='50' height='70' fill='url(%23d)'/%3E%3Crect x='3' y='3' width='44' height='64' rx='3' fill='none' stroke='%239A88FF' stroke-width='.8'/%3E%3Cpath d='M25 25l2.2 6.6 6.8.2-5.4 4.2 2 6.6-5.6-4-5.6 4 2-6.6-5.4-4.2 6.8-.2z' fill='%23FFD36B'/%3E%3C/svg%3E") !important;
+}

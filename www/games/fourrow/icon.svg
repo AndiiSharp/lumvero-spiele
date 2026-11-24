@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+<defs><linearGradient id="lvbg-fourrow" x1="0" y1="0" x2=".9" y2="1"><stop offset="0" stop-color="#F7EFF8"/><stop offset="1" stop-color="#E4CEE9"/></linearGradient></defs><rect width="96" height="96" rx="20" fill="url(#lvbg-fourrow)"/><path d="M0 20A20 20 0 0 1 20 0h56a20 20 0 0 1 20 20v8C68 40 28 42 0 26z" fill="#FFFFFF" opacity=".22"/><rect x="1" y="1" width="94" height="94" rx="19" fill="none" stroke="#FFFFFF" stroke-opacity=".35" stroke-width="1.5"/>
+<rect x="13" y="26" width="71" height="56" rx="9" fill="#4433B8"/>
+<g fill="#ECE9FB">
+<circle cx="26" cy="39" r="7"/><circle cx="41" cy="39" r="7"/><circle cx="71" cy="39" r="7"/>
+<circle cx="26" cy="54" r="7"/><circle cx="71" cy="54" r="7"/>
+</g>
+<g fill="#FFB938"><circle cx="56" cy="39" r="7"/><circle cx="41" cy="54" r="7"/><circle cx="26" cy="69" r="7"/><circle cx="71" cy="13" r="7"/></g>
+<g fill="none" stroke="#FFE1A1" stroke-width="2"><circle cx="56" cy="39" r="4"/><circle cx="41" cy="54" r="4"/><circle cx="26" cy="69" r="4"/><circle cx="71" cy="13" r="4"/></g>
+<g fill="#E0508A"><circle cx="56" cy="54" r="7"/><circle cx="41" cy="69" r="7"/><circle cx="56" cy="69" r="7"/><circle cx="71" cy="69" r="7"/></g>
+<g fill="#FFB8CF"><circle cx="56" cy="54" r="2.2"/><circle cx="41" cy="69" r="2.2"/><circle cx="56" cy="69" r="2.2"/><circle cx="71" cy="69" r="2.2"/></g>
+</svg>

@@ -1,0 +1,20 @@
+{
+  "appId": "de.lumvero.boardgames",
+  "appName": "Lumvero",
+  "webDir": "www",
+  "backgroundColor": "#0A0C18",
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "allowMixedContent": false,
+    "captureInput": false,
+    "webContentsDebuggingEnabled": false
+  },
+  "ios": {
+    "contentInset": "never",
+    "backgroundColor": "#0A0C18",
+    "scrollEnabled": false,
+    "webContentsDebuggingEnabled": false
+  }
+}
