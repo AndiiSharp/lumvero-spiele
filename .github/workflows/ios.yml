@@ -4,8 +4,6 @@
 name: iOS bauen, testen, hochladen
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
 jobs:
   ios:
     runs-on: macos-15
@@ -20,7 +18,7 @@ jobs:
           node-version: 22
       - name: Web-Teil ins iOS-Projekt kopieren
         run: |
-          npm install --no-audit --no-fund
+          npm install --omit=dev --no-audit --no-fund
           npx cap sync ios
       - name: Bauen, im Simulator testen, ggf. hochladen
         run: sh ios/ci-build.sh
