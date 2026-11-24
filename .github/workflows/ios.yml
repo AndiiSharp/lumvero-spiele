@@ -28,6 +28,10 @@ jobs:
           ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
           ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
           TEAM_ID: ${{ secrets.TEAM_ID }}
+          DIST_P12_B64: ${{ secrets.DIST_P12_B64 }}
+          DIST_P12_PASS: ${{ secrets.DIST_P12_PASS }}
+          PROFILE_B64: ${{ secrets.PROFILE_B64 }}
+          PROFILE_UUID: ${{ secrets.PROFILE_UUID }}
       - uses: actions/upload-artifact@v4
         if: always()
         with:
