@@ -55,8 +55,10 @@ if [ -n "$ASC_KEY_ID" ] && [ -n "$ASC_KEY_P8" ] && [ -n "$TEAM_ID" ]; then
   { echo "-----BEGIN PRIVATE KEY-----"; echo "$BODY" | fold -w 64; echo "-----END PRIVATE KEY-----"; } > "$KEY"
   AUTH="-allowProvisioningUpdates -authenticationKeyPath $KEY -authenticationKeyID $ASC_KEY_ID -authenticationKeyIssuerID $ASC_ISSUER_ID"
   xcodebuild $SRC -scheme App -configuration Release -destination 'generic/platform=iOS' \
-    -archivePath build/App.xcarchive $AUTH DEVELOPMENT_TEAM="$TEAM_ID" CODE_SIGN_STYLE=Automatic \
+    -archivePath build/App.xcarchive DEVELOPMENT_TEAM="$TEAM_ID" CODE_SIGNING_ALLOWED=NO \
     CURRENT_PROJECT_VERSION="$BUILD_NR" archive | tail -n 5
+  # Unsigniertes Archiv; signiert wird erst beim Export mit dem App-Store-Verteilungszertifikat
+  # (das Team hat keine registrierten Geraete, daher kein Entwicklungsprofil moeglich).
   cat > build/export.plist <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
