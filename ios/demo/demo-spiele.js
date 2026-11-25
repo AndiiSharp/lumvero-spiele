@@ -36,7 +36,8 @@
     };
     D.run([
       () => D.wait(1200),
-      async () => { for (let i = 0; i < 6; i++) { const skip = btnText(/^(Überspringen|Skip)$/); if (!skip) break; const nx = btnText(/^(Weiter|Next|Los geht.*|Let.?s go|Fertig|Done)$/); await D.tap(nx || skip, { after: 1400 }); } },
+      async () => { await D.wait(2500); for (let i = 0; i < 4; i++) { const skip = btnText(/^(Überspringen|Skip|Schließen|Close)$/); if (!skip) break; await D.tap(skip, { after: 1500 }); } },
+      async () => { if (btnText(/^(Zurück|Back)$/) && btnText(/^(Weiter|Next)$/)) { localStorage.setItem('chogan.reversi.tutSeen', 'true'); location.reload(); await D.wait(60000); } },
       myMove, myMove, myMove,
       async () => { const u = document.querySelector('button[aria-label="Zug zurück"], button[aria-label="Undo"], button[aria-label*="ndo"]'); if (u) await D.tap(u, { after: 1800 }); },
       myMove, myMove, myMove, myMove,
