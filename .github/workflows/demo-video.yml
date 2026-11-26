@@ -21,6 +21,7 @@ jobs:
       - name: Web-Teil ins iOS-Projekt kopieren
         run: |
           npm install --omit=dev --no-audit --no-fund
+          node ios/ios-filter.mjs
           npx cap sync ios
       - name: Video aufnehmen
         run: sh ios/demo/demo-video.sh
